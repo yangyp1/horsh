@@ -1,0 +1,30 @@
+env: local
+http:
+  #  host: 0.0.0.0
+  host: 127.0.0.1
+  port: 8000
+security:
+  api_sign:
+    app_key: 123456
+    app_security: 123456
+  jwt:
+    key: QQYnRFerJTSEcrfB89fw8prOaObmrch8
+data:
+  mysql:
+     user: root:Ktza_1234@tcp(39.97.101.114:3306)/sol_project?charset=utf8mb4&parseTime=True&loc=Local
+  redis:
+    addr: 127.0.0.1:6350
+    password: ""
+    db: 0
+    read_timeout: 0.2s
+    write_timeout: 0.2s
+  sol_address: 6z3kAFzN9rZ14h5qfTmEk4VvCepr1tVot6uXxWxjdU6K
+
+log:
+  log_level: debug
+  encoding: console           # json or console
+  log_file_name: "./logs/server.log"
+  max_backups: 30
+  max_age: 7
+  max_size: 1024
+  compress: true

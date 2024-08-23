@@ -1,0 +1,117 @@
+2024-07-17 12:12:38.754524000	[31merror[0m	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65	failed to initialize database, got error dial tcp 127.0.0.1:3306: connect: connection refused
+SolProject/internal/repository.NewDB
+	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65
+SolProject/cmd/server/wire.NewWire
+	/Users/yyp/go/src/SolProject/cmd/server/wire/wire_gen.go:28
+main.main
+	/Users/yyp/go/src/SolProject/cmd/server/main.go:36
+runtime.main
+	/usr/local/go/src/runtime/proc.go:267
+2024-07-17 12:14:14.683318000	[31merror[0m	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65	failed to initialize database, got error dial tcp 127.0.0.1:3306: connect: connection refused
+SolProject/internal/repository.NewDB
+	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65
+SolProject/cmd/server/wire.NewWire
+	/Users/yyp/go/src/SolProject/cmd/server/wire/wire_gen.go:28
+main.main
+	/Users/yyp/go/src/SolProject/cmd/server/main.go:36
+runtime.main
+	/usr/local/go/src/runtime/proc.go:267
+2024-07-17 12:14:56.127850000	[31merror[0m	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65	failed to initialize database, got error dial tcp 127.0.0.1:3306: connect: connection refused
+SolProject/internal/repository.NewDB
+	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65
+SolProject/cmd/server/wire.NewWire
+	/Users/yyp/go/src/SolProject/cmd/server/wire/wire_gen.go:28
+main.main
+	/Users/yyp/go/src/SolProject/cmd/server/main.go:36
+runtime.main
+	/usr/local/go/src/runtime/proc.go:267
+2024-07-17 12:16:38.496754000	[31merror[0m	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65	failed to initialize database, got error dial tcp 127.0.0.1:3306: connect: connection refused
+SolProject/internal/repository.NewDB
+	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65
+SolProject/cmd/server/wire.NewWire
+	/Users/yyp/go/src/SolProject/cmd/server/wire/wire_gen.go:28
+main.main
+	/Users/yyp/go/src/SolProject/cmd/server/main.go:36
+runtime.main
+	/usr/local/go/src/runtime/proc.go:267
+2024-07-17 12:16:41.819520000	[31merror[0m	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65	failed to initialize database, got error dial tcp 127.0.0.1:3306: connect: connection refused
+SolProject/internal/repository.NewDB
+	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65
+SolProject/cmd/server/wire.NewWire
+	/Users/yyp/go/src/SolProject/cmd/server/wire/wire_gen.go:28
+main.main
+	/Users/yyp/go/src/SolProject/cmd/server/main.go:36
+runtime.main
+	/usr/local/go/src/runtime/proc.go:267
+2024-07-17 12:18:01.765592000	[31merror[0m	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65	failed to initialize database, got error dial tcp 127.0.0.1:3306: connect: connection refused
+SolProject/internal/repository.NewDB
+	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65
+SolProject/cmd/server/wire.NewWire
+	/Users/yyp/go/src/SolProject/cmd/server/wire/wire_gen.go:28
+main.main
+	/Users/yyp/go/src/SolProject/cmd/server/main.go:36
+runtime.main
+	/usr/local/go/src/runtime/proc.go:267
+2024-07-17 12:18:03.406384000	[31merror[0m	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65	failed to initialize database, got error dial tcp 127.0.0.1:3306: connect: connection refused
+SolProject/internal/repository.NewDB
+	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65
+SolProject/cmd/server/wire.NewWire
+	/Users/yyp/go/src/SolProject/cmd/server/wire/wire_gen.go:28
+main.main
+	/Users/yyp/go/src/SolProject/cmd/server/main.go:36
+runtime.main
+	/usr/local/go/src/runtime/proc.go:267
+2024-07-17 12:18:04.959624000	[31merror[0m	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65	failed to initialize database, got error dial tcp 127.0.0.1:3306: connect: connection refused
+SolProject/internal/repository.NewDB
+	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65
+SolProject/cmd/server/wire.NewWire
+	/Users/yyp/go/src/SolProject/cmd/server/wire/wire_gen.go:28
+main.main
+	/Users/yyp/go/src/SolProject/cmd/server/main.go:36
+runtime.main
+	/usr/local/go/src/runtime/proc.go:267
+2024-07-17 12:18:09.102434000	[31merror[0m	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65	failed to initialize database, got error dial tcp 127.0.0.1:3306: connect: connection refused
+SolProject/internal/repository.NewDB
+	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65
+SolProject/cmd/server/wire.NewWire
+	/Users/yyp/go/src/SolProject/cmd/server/wire/wire_gen.go:28
+main.main
+	/Users/yyp/go/src/SolProject/cmd/server/main.go:36
+runtime.main
+	/usr/local/go/src/runtime/proc.go:267
+2024-07-17 12:18:10.968836000	[31merror[0m	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65	failed to initialize database, got error dial tcp 127.0.0.1:3306: connect: connection refused
+SolProject/internal/repository.NewDB
+	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65
+SolProject/cmd/server/wire.NewWire
+	/Users/yyp/go/src/SolProject/cmd/server/wire/wire_gen.go:28
+main.main
+	/Users/yyp/go/src/SolProject/cmd/server/main.go:36
+runtime.main
+	/usr/local/go/src/runtime/proc.go:267
+2024-07-17 12:18:12.192809000	[31merror[0m	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65	failed to initialize database, got error dial tcp 127.0.0.1:3306: connect: connection refused
+SolProject/internal/repository.NewDB
+	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65
+SolProject/cmd/server/wire.NewWire
+	/Users/yyp/go/src/SolProject/cmd/server/wire/wire_gen.go:28
+main.main
+	/Users/yyp/go/src/SolProject/cmd/server/main.go:36
+runtime.main
+	/usr/local/go/src/runtime/proc.go:267
+2024-07-17 12:43:54.177301000	[31merror[0m	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65	failed to initialize database, got error dial tcp 127.0.0.1:3306: connect: connection refused
+SolProject/internal/repository.NewDB
+	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65
+SolProject/cmd/server/wire.NewWire
+	/Users/yyp/go/src/SolProject/cmd/server/wire/wire_gen.go:28
+main.main
+	/Users/yyp/go/src/SolProject/cmd/server/main.go:36
+runtime.main
+	/usr/local/go/src/runtime/proc.go:267
+2024-07-17 12:45:18.618870000	[31merror[0m	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65	failed to initialize database, got error dial tcp 127.0.0.1:3306: connect: connection refused
+SolProject/internal/repository.NewDB
+	/Users/yyp/go/src/SolProject/internal/repository/repository.go:65
+SolProject/cmd/server/wire.NewWire
+	/Users/yyp/go/src/SolProject/cmd/server/wire/wire_gen.go:28
+main.main
+	/Users/yyp/go/src/SolProject/cmd/server/main.go:36
+runtime.main
+	/usr/local/go/src/runtime/proc.go:267

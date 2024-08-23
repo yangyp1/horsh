@@ -1,0 +1,718 @@
+definitions:
+  SolProject_api_v1.AdminAllCountResponseData:
+    properties:
+      bonus_count:
+        type: integer
+      regis_count:
+        type: integer
+      totol_amount:
+        type: number
+    type: object
+  SolProject_api_v1.AdminLoginRequest:
+    properties:
+      password:
+        type: string
+      username:
+        example: 0x2w323423
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  SolProject_api_v1.AdminSearchRequest:
+    properties:
+      address:
+        description: 地址
+        type: string
+      code:
+        description: 邀请码
+        type: string
+      end_time:
+        description: 结束时间
+        example: "2024-07-01 15:03:04"
+        type: string
+      invite_by:
+        description: 被谁邀请
+        type: string
+      is_inviteby:
+        description: 是否去除被邀请
+        type: boolean
+      is_not_empty_amount:
+        description: SOL数量不为空
+        type: boolean
+      page:
+        description: '"分页"'
+        type: integer
+      page_size:
+        description: '"每页数量"'
+        type: integer
+      start_time:
+        description: 开始时间
+        example: "2024-06-01 15:03:04"
+        type: string
+    type: object
+  SolProject_api_v1.AdminSearchResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/SolProject_api_v1.AdminSearchResponseDa'
+      message:
+        type: string
+    type: object
+  SolProject_api_v1.AdminSearchResponseDa:
+    properties:
+      count:
+        description: 数量
+        type: integer
+      returnData:
+        description: 数据
+        items:
+          $ref: '#/definitions/SolProject_api_v1.AdminSearchResponseData'
+        type: array
+    type: object
+  SolProject_api_v1.AdminSearchResponseData:
+    properties:
+      address:
+        description: 地址
+        type: string
+      bonus:
+        description: 个人捐赠马头
+        type: string
+      bonus_time:
+        description: 捐赠时间
+        type: string
+      code:
+        description: 邀请码
+        type: string
+      direct_count:
+        description: 直推人数
+        type: integer
+      direct_sol_amount:
+        description: 直推捐款sol数量
+        type: string
+      evm_address:
+        type: string
+      invite_by:
+        description: 上级ID
+        type: string
+      sol_amount:
+        description: 本人SOL
+        type: number
+      team_count:
+        description: 团队人数
+        type: integer
+      team_sol_amount:
+        description: 团队捐款sol数量
+        type: string
+      user_id:
+        description: 用户id
+        type: string
+    type: object
+  SolProject_api_v1.AllCountResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/SolProject_api_v1.AdminAllCountResponseData'
+      message:
+        type: string
+    type: object
+  SolProject_api_v1.BindEvmAddressRequest:
+    properties:
+      evm_address:
+        example: 0x0324adsdacfdtswcsdds23eecwr
+        type: string
+    type: object
+  SolProject_api_v1.ClaimRequest:
+    properties:
+      claim_type:
+        description: 直推奖励，团队奖励
+        enum:
+        - direct
+        - team
+        type: string
+      count:
+        description: 数量
+        type: integer
+    required:
+    - claim_type
+    - count
+    type: object
+  SolProject_api_v1.ExportRequest:
+    properties:
+      address:
+        description: 地址
+        type: string
+      end_time:
+        description: 结束时间
+        example: "2024-07-01 15:03:04"
+        type: string
+      start_time:
+        description: 开始时间
+        example: "2024-06-01 15:03:04"
+        type: string
+    type: object
+  SolProject_api_v1.ExportTeamRequest:
+    properties:
+      user_id:
+        description: 地址
+        type: string
+    type: object
+  SolProject_api_v1.GetProfileResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/SolProject_api_v1.GetProfileResponseData'
+      message:
+        type: string
+    type: object
+  SolProject_api_v1.GetProfileResponseData:
+    properties:
+      userId:
+        type: string
+    type: object
+  SolProject_api_v1.HorshTransferRequest:
+    properties:
+      horsh_hash:
+        type: string
+    required:
+    - horsh_hash
+    type: object
+  SolProject_api_v1.InviteCodeRequest:
+    properties:
+      Code:
+        type: string
+      user_id:
+        type: string
+    required:
+    - Code
+    - user_id
+    type: object
+  SolProject_api_v1.InviteCodeResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/SolProject_api_v1.InviteCodeResponseData'
+      message:
+        type: string
+    type: object
+  SolProject_api_v1.InviteCodeResponseData:
+    properties:
+      User_id:
+        description: 用户ID
+        type: string
+      accessToken:
+        description: token
+        type: string
+    type: object
+  SolProject_api_v1.LoginRequest:
+    properties:
+      address:
+        example: 0x2w323423
+        type: string
+      login_type:
+        enum:
+        - sol
+        - evm
+        type: string
+      original_msg:
+        type: string
+      signature_hex:
+        type: string
+    required:
+    - address
+    - login_type
+    - original_msg
+    - signature_hex
+    type: object
+  SolProject_api_v1.LoginResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/SolProject_api_v1.LoginResponseData'
+      message:
+        type: string
+    type: object
+  SolProject_api_v1.LoginResponseData:
+    properties:
+      User_id:
+        description: 用户ID
+        type: string
+      accessToken:
+        description: token
+        type: string
+      address:
+        description: SOL钱包地址
+        type: string
+      code:
+        description: 自己的邀请码
+        type: string
+      evm_address:
+        description: evm钱包地址
+        type: string
+      horsh_count:
+        type: integer
+      sol_amount:
+        description: 捐赠SOL数量
+        type: number
+      usdt_count:
+        type: integer
+    type: object
+  SolProject_api_v1.Response:
+    properties:
+      code:
+        type: integer
+      data: {}
+      message:
+        type: string
+    type: object
+  SolProject_api_v1.SelectResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/SolProject_api_v1.SelectResponseData'
+      message:
+        type: string
+    type: object
+  SolProject_api_v1.SelectResponseData:
+    properties:
+      bonus:
+        description: 马头奖励
+        type: number
+      claim_direct_reward:
+        description: 提取直邀奖励
+        type: integer
+      claim_team_reward:
+        description: 提取团邀奖励
+        type: integer
+      direct_count:
+        description: 直推人数
+        type: integer
+      direct_performance:
+        description: 直邀业绩
+        type: integer
+      direct_reward:
+        description: 直邀奖励
+        type: integer
+      direct_sol_amount:
+        description: 直推捐款sol数量
+        type: string
+      estimated_earnings:
+        description: 预计收益
+        type: integer
+      evm_address:
+        description: EVM地址
+        type: string
+      global_nodes:
+        description: 节点总数
+        type: integer
+      my_nodes:
+        description: 我的节点数量
+        type: integer
+      my_racehorses:
+        description: 我的赛马
+        type: integer
+      my_stable:
+        description: 我的马场
+        type: integer
+      team_count:
+        description: 团队人数
+        type: integer
+      team_performance:
+        description: 团队业绩
+        type: integer
+      team_reward:
+        description: 团邀奖励
+        type: integer
+      team_sol_amount:
+        description: 团队捐款sol数量
+        type: string
+    type: object
+  SolProject_api_v1.SolSearchRequest:
+    properties:
+      address:
+        description: Evm地址
+        type: string
+    type: object
+  SolProject_api_v1.SolSearchResponData:
+    properties:
+      direct_count:
+        description: 直推人数
+        type: integer
+      direct_performance:
+        description: 直邀业绩
+        type: integer
+      evm_address:
+        type: string
+      team_count:
+        description: 团队人数
+        type: integer
+      team_performance:
+        description: 团队业绩
+        type: integer
+      user_id:
+        type: string
+    type: object
+  SolProject_api_v1.SolSearchResponse:
+    properties:
+      code:
+        type: integer
+      data:
+        $ref: '#/definitions/SolProject_api_v1.SolSearchResponData'
+      message:
+        type: string
+    type: object
+  SolProject_api_v1.USDTTransferRequest:
+    properties:
+      usdt_hash:
+        type: string
+    required:
+    - usdt_hash
+    type: object
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server celler server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: SOL Project API
+  version: 1.0.0
+paths:
+  /admin/CreationCount:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 分页
+        in: query
+        name: code
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - Bearer: []
+      summary: 查询邀请码邀请总数
+      tags:
+      - 管理后台
+  /admin/allCount:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/SolProject_api_v1.AllCountResponse'
+      security:
+      - Bearer: []
+      summary: 查询总注册人数
+      tags:
+      - 管理后台
+  /admin/export-record:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/SolProject_api_v1.ExportRequest'
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - Bearer: []
+      summary: 导出转账记录
+      tags:
+      - 管理后台
+  /admin/export-record-regis:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses: {}
+      summary: 导出所有注册人的记录
+      tags:
+      - 管理后台
+  /admin/export-record-team:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/SolProject_api_v1.ExportTeamRequest'
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - Bearer: []
+      summary: 导出转账记录整个团队
+      tags:
+      - 管理后台
+  /admin/login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/SolProject_api_v1.AdminLoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/SolProject_api_v1.Response'
+      summary: 登录
+      tags:
+      - 管理后台
+  /admin/search:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/SolProject_api_v1.AdminSearchRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/SolProject_api_v1.AdminSearchResponse'
+      security:
+      - Bearer: []
+      summary: 查询
+      tags:
+      - 管理后台
+  /login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/SolProject_api_v1.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/SolProject_api_v1.LoginResponse'
+      summary: 账号登录
+      tags:
+      - 用户模块
+  /user:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/SolProject_api_v1.GetProfileResponse'
+      security:
+      - Bearer: []
+      summary: 获取用户信息
+      tags:
+      - 用户模块
+  /user/Invitecode:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/SolProject_api_v1.InviteCodeRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/SolProject_api_v1.InviteCodeResponse'
+      security:
+      - Bearer: []
+      summary: 使用邀请码生成邀请链接
+      tags:
+      - 用户模块
+  /user/Solsearch:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/SolProject_api_v1.SolSearchRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/SolProject_api_v1.SolSearchResponse'
+      security:
+      - Bearer: []
+      summary: 搜索SOL地址
+      tags:
+      - 用户模块
+  /user/bind/evmaddress:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/SolProject_api_v1.BindEvmAddressRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/SolProject_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 绑定evm地址
+      tags:
+      - 用户模块
+  /user/claim/reward:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/SolProject_api_v1.ClaimRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/SolProject_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: 提取奖励
+      tags:
+      - 用户模块
+  /user/horsh/transfer:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/SolProject_api_v1.HorshTransferRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/SolProject_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: Horsh交易确认
+      tags:
+      - 用户模块
+  /user/select:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 用户ID
+        in: query
+        name: user_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/SolProject_api_v1.SelectResponse'
+      security:
+      - Bearer: []
+      summary: 邀请人数查询
+      tags:
+      - 用户模块
+  /user/usdt/transfer:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/SolProject_api_v1.USDTTransferRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/SolProject_api_v1.Response'
+      security:
+      - Bearer: []
+      summary: USDT交易确认
+      tags:
+      - 用户模块
+securityDefinitions:
+  Bearer:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
