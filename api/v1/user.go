@@ -144,13 +144,16 @@ type AdminSearchResponseData struct {
 	EvmAddress      string  `json:"evm_address" csv:"EVM地址"`
 	Code            string  `gorm:"not null" json:"code" csv:"邀请码"`       //邀请码
 	InviteBy        string  `gorm:"not null" json:"invite_by" csv:"上级ID"` //上级ID
-	SolAmount       float64 `json:"sol_amount" csv:"本人SOL"`               //本人SOL
+	//SolAmount       float64 `json:"sol_amount" csv:"本人SOL"`               //本人SOL
 	DirectCount     int64   `json:"direct_count" csv:"直推人数"`              //直推人数
 	TeamCount       int64   `json:"team_count" csv:"团队人数"`                //团队人数
-	DirectSolAmount string  `json:"direct_sol_amount" csv:"直推捐款sol数量"`    //直推捐款sol数量
-	TeamSolAmount   string  `json:"team_sol_amount" csv:"团队捐款sol数量"`      //团队捐款sol数量
-	BonusTime       string  `json:"bonus_time" csv:"捐赠时间"`                //捐赠时间
-	Bonus           string  `json:"bonus" csv:"个人捐赠马头"`                   //个人捐赠马头
+	PeosonalNode    int64   `json:"peosonal_node" csv:"个人入金"`             //个人入金
+	DirectNode      int64   `json:"direct_node" csv:"直推入金"`               //直推入金
+	TeamNode        int64   `json:"team_node" csv:"团队入金"`                 //团队入金
+	//DirectSolAmount string  `json:"direct_sol_amount" csv:"直推捐款sol数量"`    //直推捐款sol数量
+	//TeamSolAmount   string  `json:"team_sol_amount" csv:"团队捐款sol数量"`      //团队捐款sol数量
+	//BonusTime       string  `json:"bonus_time" csv:"捐赠时间"`                //捐赠时间
+	//Bonus           string  `json:"bonus" csv:"个人捐赠马头"`                   //个人捐赠马头
 }
 
 type AdminSearchResponseDa struct {
@@ -204,6 +207,12 @@ type Invitecount struct {
 type InviteAmount struct {
 	DirectAmount float64 `json:"directamount" gorm:"column:directamount"`
 	TeamAmount   float64 `json:"teamamount" gorm:"column:teamamount"`
+}
+
+
+type InviteNode struct {
+	DirectNode float64 `json:"directnode" gorm:"column:directnode"`
+	TeamNode   float64 `json:"teamnode" gorm:"column:teamnode"`
 }
 
 type AdminAllCountResponseData struct {

@@ -16,6 +16,7 @@ type InvitationsRepository interface {
 	FindByInviterId(ctx context.Context, InviterId string, level int) (*[]model.Invitations, error)
 	GetInviteCount(ctx context.Context, user_id string) (*v1.Invitecount, error)
 	GetInviteAmount(ctx context.Context, user_id string) (*v1.InviteAmount, error)
+	GetInviteNode(ctx context.Context, user_id string) (*v1.InviteNode, error)
 	CreationCount(ctx context.Context, codes []string) ([]string, error)
 }
 type invitationsRepository struct {
@@ -90,6 +91,17 @@ func (r *invitationsRepository) GetInviteAmount(ctx context.Context, user_id str
 		return &amount, err
 	}
 	return &amount, nil
+}
+
+func (r *invitationsRepository) GetInviteNode(ctx context.Context, user_id string) (*v1.InviteNode, error) {
+	node := v1.InviteNode{}
+	if err := r.DB(ctx).Raw("SELECT COALESCE(SUM(CASE WHEN level = 1 THEN nodes ELSE 0 END),0) as directnode,COALESCE(SUM(nodes),0) as teamnode FROM invitations join users on users.user_id = invitations.invitee_id WHERE inviter_id = ?", user_id).Scan(&node).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return &node, nil
+		}
+		return &node, err
+	}
+	return &node, nil
 }
 
 func (r *invitationsRepository) CreationCount(ctx context.Context, codes []string) ([]string, error) {

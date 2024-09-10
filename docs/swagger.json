@@ -656,25 +656,17 @@
                     "description": "地址",
                     "type": "string"
                 },
-                "bonus": {
-                    "description": "个人捐赠马头",
-                    "type": "string"
-                },
-                "bonus_time": {
-                    "description": "捐赠时间",
-                    "type": "string"
-                },
                 "code": {
                     "description": "邀请码",
                     "type": "string"
                 },
                 "direct_count": {
-                    "description": "直推人数",
+                    "description": "SolAmount       float64 `json:\"sol_amount\" csv:\"本人SOL\"`               //本人SOL",
                     "type": "integer"
                 },
-                "direct_sol_amount": {
-                    "description": "直推捐款sol数量",
-                    "type": "string"
+                "direct_node": {
+                    "description": "直推入金",
+                    "type": "integer"
                 },
                 "evm_address": {
                     "type": "string"
@@ -683,17 +675,17 @@
                     "description": "上级ID",
                     "type": "string"
                 },
-                "sol_amount": {
-                    "description": "本人SOL",
-                    "type": "number"
+                "peosonal_node": {
+                    "description": "个人入金",
+                    "type": "integer"
                 },
                 "team_count": {
                     "description": "团队人数",
                     "type": "integer"
                 },
-                "team_sol_amount": {
-                    "description": "团队捐款sol数量",
-                    "type": "string"
+                "team_node": {
+                    "description": "团队入金",
+                    "type": "integer"
                 },
                 "user_id": {
                     "description": "用户id",

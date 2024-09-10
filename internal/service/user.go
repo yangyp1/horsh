@@ -349,23 +349,26 @@ func (s *userService) AdminSearch(ctx context.Context, req *v1.AdminSearchReques
 		if err != nil {
 			return count, &repos, err
 		}
-		amount, err := s.inviteRepo.GetInviteAmount(ctx, user.UserId)
+		node, err := s.inviteRepo.GetInviteNode(ctx, user.UserId)
 		if err != nil {
 			return count, &repos, err
 		}
 		repos = append(repos, v1.AdminSearchResponseData{
-			UserId:          user.UserId,
-			Address:         user.Address,
-			EvmAddress:      user.EvmAddress,
-			Code:            user.Code,
-			InviteBy:        user.InviteBy,
-			SolAmount:       user.SolAmount,
-			DirectCount:     invicount.DirectCount,
-			TeamCount:       invicount.TeamCount,
-			DirectSolAmount: fmt.Sprintf("%.2f", amount.DirectAmount),
-			TeamSolAmount:   fmt.Sprintf("%.2f", amount.TeamAmount),
-			BonusTime:       user.UpdatedAt.Format("2006-01-02 15:04:05"),
-			Bonus:           fmt.Sprintf("%.4f", amount.DirectAmount*0.05),
+			UserId:       user.UserId,
+			Address:      user.Address,
+			EvmAddress:   user.EvmAddress,
+			Code:         user.Code,
+			InviteBy:     user.InviteBy,
+			//SolAmount:    user.SolAmount,
+			DirectCount:  invicount.DirectCount,
+			TeamCount:    invicount.TeamCount,
+			PeosonalNode: int64(user.Nodes),
+			DirectNode:   int64(node.DirectNode),
+			TeamNode:     int64(node.TeamNode),
+			//DirectSolAmount: fmt.Sprintf("%.2f", amount.DirectAmount),
+			//TeamSolAmount:   fmt.Sprintf("%.2f", amount.TeamAmount),
+			//BonusTime:       user.UpdatedAt.Format("2006-01-02 15:04:05"),
+			//Bonus:           fmt.Sprintf("%.4f", amount.DirectAmount*0.05),
 		})
 
 	}
@@ -691,13 +694,6 @@ func (s *userService) HorshTransfer(ctx context.Context, userId string, req v1.H
 	// 解析交易中的指令
 	s.logger.Sugar().Infof("%#v", tx.Result)
 	confirm_status := 0
-
-	min := func() int {
-		if user.HorshCount > user.UsdtCount {
-			return user.UsdtCount
-		}
-		return user.HorshCount
-	}()
 	if len(tx.Result.Transaction.Message.AccountKeys) == 0 {
 		return user, 0, nil
 	}
@@ -705,6 +701,13 @@ func (s *userService) HorshTransfer(ctx context.Context, userId string, req v1.H
 	for i, postBalance := range tx.Result.Meta.PostTokenBalances {
 		preBalance := tx.Result.Meta.PreTokenBalances[i]
 		if postBalance.UiTokenAmount.UiAmount > preBalance.UiTokenAmount.UiAmount {
+			user.HorshCount += 1
+			min := func() int {
+				if user.HorshCount > user.UsdtCount {
+					return user.UsdtCount
+				}
+				return user.HorshCount
+			}()
 			confirm_status = 1
 			Horsh.UserId = userId
 			Horsh.RecvAddress = postBalance.Owner
@@ -772,12 +775,6 @@ func (s *userService) USDTTransfer(ctx context.Context, userId string, req v1.US
 	if user == nil {
 		return &model.User{}, 0, fmt.Errorf("user not exist")
 	}
-	min := func() int {
-		if user.HorshCount > user.UsdtCount {
-			return user.UsdtCount
-		}
-		return user.HorshCount
-	}()
 	if len(tx.Result.Transaction.Message.AccountKeys) == 0 {
 		return user, 0, nil
 	}
@@ -788,6 +785,13 @@ func (s *userService) USDTTransfer(ctx context.Context, userId string, req v1.US
 	for i, postBalance := range tx.Result.Meta.PostTokenBalances {
 		preBalance := tx.Result.Meta.PreTokenBalances[i]
 		if postBalance.UiTokenAmount.UiAmount > preBalance.UiTokenAmount.UiAmount {
+			user.UsdtCount += 1
+			min := func() int {
+				if user.HorshCount > user.UsdtCount {
+					return user.UsdtCount
+				}
+				return user.HorshCount
+			}()
 			confirm_status = 1
 			USDT.UserId = userId
 			USDT.RecvAddress = postBalance.Owner
@@ -795,8 +799,8 @@ func (s *userService) USDTTransfer(ctx context.Context, userId string, req v1.US
 			USDT.ProgramId = postBalance.ProgramId
 			USDT.Signatures = tx.Result.Transaction.Signatures[0]
 			err = s.tm.Transaction(ctx, func(ctx context.Context) error {
-				// 创建用户
-				if err = s.userRepo.UpDateByHorshCount(ctx, userId); err != nil {
+				// 更新usdt节点
+				if err = s.userRepo.UpDateByUSDTCount(ctx, userId); err != nil {
 					return err
 				}
 				//插入交易记录
@@ -948,7 +952,6 @@ func (s *userService) Select(ctx context.Context, user_id string) (*v1.SelectRes
 	if user.Address == "EFxTbjFeGtWrShQ1Gb3Z2tCujRWKsFULBaRJuycQhMMW" {
 		teamreward = user.TeamReward
 		claimteamreward = user.ClaimTeamReward
-
 	}
 	repo.GlobalNodes = int(globalNodes)
 	repo.EvmAddress = user.EvmAddress
@@ -959,7 +962,7 @@ func (s *userService) Select(ctx context.Context, user_id string) (*v1.SelectRes
 	repo.DirectPerformance = (user.DirectReward + user.ClaimDirectReward) * 10
 	repo.DirectReward = user.DirectReward
 	repo.ClaimDirectReward = user.ClaimDirectReward
-	repo.TeamPerformance = (teamreward + claimteamreward) * 20
+	repo.TeamPerformance = (user.TeamReward + user.ClaimTeamReward) * 20
 	repo.TeamReward = teamreward
 	repo.ClaimTeamReward = claimteamreward
 	repo.DirectCount = invicount.DirectCount
@@ -972,7 +975,7 @@ func (s *userService) Select(ctx context.Context, user_id string) (*v1.SelectRes
 func (s *userService) Solsearch(ctx context.Context, user_id string, address string) (*[]v1.SolSearchResponData, error) {
 	repos := []v1.SolSearchResponData{}
 	if address != "" {
-		user, err := s.userRepo.GetByEvmAddress(ctx, address)
+		user, err := s.userRepo.GetByAddress(ctx, address)
 		if err != nil {
 			return &repos, err
 		}
@@ -987,13 +990,14 @@ func (s *userService) Solsearch(ctx context.Context, user_id string, address str
 	}
 	for _, user := range *users {
 		InviteCount, err := s.inviteRepo.GetInviteCount(ctx, user.UserId)
+		fmt.Printf("InviteCount:%+v\n", InviteCount)
 		if err != nil {
 			s.logger.WithContext(ctx).Sugar().Errorf("GetInviteCount EvmAddress:%s Err:%s", user.EvmAddress, err.Error())
 			continue
 		}
 		repos = append(repos, v1.SolSearchResponData{
 			UserId:            user.UserId,
-			EvmAddress:        user.EvmAddress,
+			EvmAddress:        user.Address,
 			DirectCount:       InviteCount.DirectCount,
 			TeamCount:         InviteCount.TeamCount,
 			DirectPerformance: (user.ClaimDirectReward + user.DirectReward) * 10,

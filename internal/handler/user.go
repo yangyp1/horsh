@@ -223,7 +223,7 @@ func (h *UserHandler) HorshTransfer(ctx *gin.Context) {
 	}
 
 	v1.HandleSuccess(ctx, gin.H{
-		"horsh_count":    user.HorshCount+1,
+		"horsh_count":    user.HorshCount,
 		"confirm_status": confirm_status,
 	})
 }
@@ -252,7 +252,7 @@ func (h *UserHandler) USDTTransfer(ctx *gin.Context) {
 		return
 	}
 	v1.HandleSuccess(ctx, gin.H{
-		"usdt_count":     user.UsdtCount+1,
+		"usdt_count":     user.UsdtCount,
 		"confirm_status": confirm_status,
 	})
 }

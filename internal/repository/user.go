@@ -162,7 +162,7 @@ func (r *userRepository) GetByAll(ctx context.Context, req *v1.AdminSearchReques
 
 func (r *userRepository) GetAllCounty(ctx context.Context) (*v1.AdminAllCountResponseData, error) {
 	allcount := v1.AdminAllCountResponseData{}
-	if err := r.DB(ctx).Raw("SELECT COUNT(*) AS regis_count,SUM(CASE WHEN sol_amount != 0 THEN 1 ELSE 0 END) AS bonus_count,SUM(sol_amount) AS totol_amount FROM users").Scan(&allcount).Error; err != nil {
+	if err := r.DB(ctx).Raw("SELECT COUNT(*) AS regis_count,SUM(CASE WHEN nodes != 0 THEN 1 ELSE 0 END) AS bonus_count,SUM(nodes) AS totol_amount FROM users").Scan(&allcount).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return &allcount, nil
 		}
